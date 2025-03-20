@@ -51,7 +51,7 @@ const Todo = () => {
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-      ) : isError ? (
+      ) : isError && !isLoading ? (
         <h2 className={styles.errorMessage}>Failed to load todos</h2>
       ) : (
         <div className={styles.todoList}>
