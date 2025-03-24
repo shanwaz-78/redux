@@ -1,20 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchTodo = createAsyncThunk("Fetch Todos", async () => {
-  const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/todos`
-  );
-  return response.data;
-});
+export const fetchTodo = createAsyncThunk(
+  "Fetch Todos",
+  async () => {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/todos`
+    );
+    return response.data;
+  }
+);
 
 const todoSlice = createSlice({
   name: "todo",
   initialState: {
     isLoading: false,
     isError: false,
-    data: [], 
-    localData: [], 
+    data: [],
+    localData: [],
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodo.pending, (state, _) => {
@@ -24,7 +27,7 @@ const todoSlice = createSlice({
     builder.addCase(fetchTodo.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      state.data = action.payload; 
+      state.data = action.payload;
     });
     builder.addCase(fetchTodo.rejected, (state, _) => {
       state.isLoading = false;
@@ -35,13 +38,13 @@ const todoSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const newTodo = {
-        id: Date.now(), 
-        title: action.payload, 
-        completed: false, 
+        id: Date.now(),
+        title: action.payload,
+        completed: false,
       };
-      state.localData.push(newTodo); 
+      state.localData.push(newTodo);
     },
-  
+
     editItem: (state, action) => {
       const { id, title } = action.payload;
       const todoToEdit =
