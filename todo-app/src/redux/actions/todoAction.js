@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const fetchTodos = createAsyncThunk(
-  "Fetch Todod",
+  "Fetch Todos",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
